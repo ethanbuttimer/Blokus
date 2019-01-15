@@ -80,18 +80,14 @@ class Board {
     ArrayList<Square> neighbors = new ArrayList<Square>();
     ArrayList<Square> diagonals = new ArrayList<Square>();
     
-    try {
-      neighbors.add(positions[x+1][y]);
-      neighbors.add(positions[x][y+1]);
-      neighbors.add(positions[x-1][y]);
-      neighbors.add(positions[x][y-1]);
-    } catch (ArrayIndexOutOfBoundsException e) {}
-    try {
-      diagonals.add(positions[x+1][y+1]);
-      diagonals.add(positions[x-1][y+1]);
-      diagonals.add(positions[x+1][y-1]);
-      diagonals.add(positions[x-1][y-1]);
-    } catch (ArrayIndexOutOfBoundsException e) {}
+    try {neighbors.add(positions[x+1][y]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {neighbors.add(positions[x][y+1]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {neighbors.add(positions[x-1][y]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {neighbors.add(positions[x][y-1]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {diagonals.add(positions[x+1][y+1]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {diagonals.add(positions[x-1][y+1]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {diagonals.add(positions[x+1][y-1]);} catch (ArrayIndexOutOfBoundsException e) {}
+    try {diagonals.add(positions[x-1][y-1]);} catch (ArrayIndexOutOfBoundsException e) {}
     
     //tests for neighbors of same color
     for (Square n : neighbors) {
