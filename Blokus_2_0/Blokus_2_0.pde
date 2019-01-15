@@ -152,10 +152,10 @@ void setUpEndInterface() {
   }
   if (scoreDiff > 0) {
     message = (p1.colorString + " wins by " + scoreDiff + endPart);
-    text(message, 640, 300);
+    text(message, 660, 300);
   } else if (scoreDiff < 0) {
     message = (p2.colorString + " wins by " + -scoreDiff + endPart);
-    text(message, 640, 300);
+    text(message, 660, 300);
   } else {
     text(message, 815, 300);
   }
