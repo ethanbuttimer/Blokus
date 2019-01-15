@@ -68,7 +68,6 @@ class Board {
       return 0;
     }
     
-    print(position.colorID + " " + sqr.colorID);
     if (position.colorMarker && position.colorID == sqr.colorID) {
       return 3;
     }
