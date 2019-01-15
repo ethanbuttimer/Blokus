@@ -1,10 +1,10 @@
 class Piece {
-  int colorID;
-  int typeID;
-  Square[] squareSet;
+  private int colorID;
+  private int typeID;
+  private Square[] squareSet;
   
   //storage of all 21 shape types as a set of squares
-  int[][][] pieceTypeData = 
+  private int[][][] pieceTypeData = 
   {{{0, 0}},
   {{0, 0}, {0, 1}},
   {{0, 0}, {0, -1}, {0, 1}},
