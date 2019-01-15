@@ -1,10 +1,10 @@
 class Player {
-  Piece[] inventory = new Piece[21];
-  Board invBoard;
-  int colorID;
-  int points;
-  String colorString;
-  boolean playedLastTurn = true;
+  private Piece[] inventory = new Piece[21];
+  private Board invBoard;
+  private int colorID;
+  private int points;
+  private String colorString;
+  private boolean playedLastTurn = true;
   
   Player(int colorID_) {
     colorID = colorID_;
