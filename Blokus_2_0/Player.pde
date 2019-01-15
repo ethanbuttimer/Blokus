@@ -3,6 +3,7 @@ class Player {
   Board invBoard;
   int colorID;
   int points;
+  String colorString;
   boolean playedLastTurn = true;
   
   Player(int colorID_) {
@@ -12,6 +13,12 @@ class Player {
       inventory[i] = new Piece(colorID, i);
     }
     points = 0;
+    switch (colorID) {
+      case 0: colorString = "Red";
+      case 1: colorString = "Green";
+      case 2: colorString = "Yellow";
+      case 3: colorString = "Blue";
+    }
   }
   
   //specifies position of each piece in a single player's inventory. 
