@@ -1,10 +1,10 @@
 class Button {
-  int x, y;
-  int sizeX, sizeY;
-  color baseColor, pressedColor;
-  boolean pressed = false;
-  PImage imgFile;
-  String text;
+  private int x, y;
+  private int sizeX, sizeY;
+  private color baseColor, pressedColor;
+  private boolean pressed = false;
+  private PImage imgFile;
+  private String text;
   
   //initializes the displayed text, position, size, and colors.
   Button(String text_, int x_, int y_, int sizeX_, int sizeY_, 
