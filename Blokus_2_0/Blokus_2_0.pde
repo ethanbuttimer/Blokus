@@ -152,10 +152,10 @@ void setUpEndInterface() {
   }
   if (scoreDiff > 0) {
     message = ("Player 1 wins by " + scoreDiff + endPart);
-    text(message, 650, 300);
+    text(message, 640, 300);
   } else if (scoreDiff < 0) {
     message = ("Player 2 wins by " + -scoreDiff + endPart);
-    text(message, 650, 300);
+    text(message, 640, 300);
   } else {
     text(message, 815, 300);
   }
