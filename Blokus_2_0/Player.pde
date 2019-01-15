@@ -15,9 +15,13 @@ class Player {
     points = 0;
     switch (colorID) {
       case 0: colorString = "Red";
+              break;
       case 1: colorString = "Green";
+              break;
       case 2: colorString = "Yellow";
+              break;
       case 3: colorString = "Blue";
+              break;
     }
   }
   
