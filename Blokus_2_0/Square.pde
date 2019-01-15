@@ -1,25 +1,24 @@
 class Square {
-  
-  int i;
-  int j;
-  int x;
-  int y;
-  int w = 30;
-  boolean colorMarker = false;
-  color mark;
-  int colorID = -1;
-  int pieceTypeID = -1;
-  boolean filled = false;
+  private int i;
+  private int j;
+  private int x;
+  private int y;
+  private int w = 30;
+  private boolean colorMarker = false;
+  private color mark;
+  private int colorID = -1;
+  private int pieceTypeID = -1;
+  private boolean filled = false;
   
   //red colorID: 0
   //green colorID: 1
   //yellow colorID: 2
   //blue colorID: 3
   
-  color[] currentSet = {color(150), color(0), color(255)};
+  private color[] currentSet = {color(150), color(0), color(255)};
   
   //colorID gives the index of the list of colors in colorSets.
-  color[][] colorSets = {{color(255, 0, 0), color(200, 60, 60), color(255, 120, 120)},
+  private color[][] colorSets = {{color(255, 0, 0), color(200, 60, 60), color(255, 120, 120)},
   {color(0, 200, 0), color(0, 150, 0), color(120, 255, 120)},
   {color(200, 200, 0), color(190, 170, 0), color(255, 255, 0)},
   {color(0, 0, 255), color(0, 0, 200), color(120, 120, 255)}};
