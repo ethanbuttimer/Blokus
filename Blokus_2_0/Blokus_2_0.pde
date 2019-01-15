@@ -329,7 +329,7 @@ void mousePressed() {
       }
     }
     if (!inSetup) {
-      if (currentPlayer.invBoard.onBoard(mouseX, mouseY) && !currentTurnPlayed) {
+      if (currentPlayer.invBoard.onBoard(mouseX, mouseY) && !currentTurnPlayed && panelPiece == null) {
         int selectedPieceID = currentPlayer.invBoard.getPieceType(mouseX, mouseY);
         if (selectedPieceID != -1) {
           panelPiece = currentPlayer.inventory[selectedPieceID];
