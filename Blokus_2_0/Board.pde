@@ -1,11 +1,10 @@
 class Board {
-  Square[][] positions;
-  Piece phantomPiece;
-  int cols;
-  int rows;
-  int insetsX;
-  int insetsY;
-  float scaler;
+  private Square[][] positions;
+  private int cols;
+  private int rows;
+  private int insetsX;
+  private int insetsY;
+  private float scaler;
   
   //initializes attributes: number of columns, rows; coordinates of top left corner of board as insets; scaling parameter.
   //fills positions array with unfillled squares
