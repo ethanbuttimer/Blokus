@@ -151,10 +151,10 @@ void setUpEndInterface() {
     endPart = " square!";
   }
   if (scoreDiff > 0) {
-    message = ("Player 1 wins by " + scoreDiff + endPart);
+    message = (p1.colorString + " wins by " + scoreDiff + endPart);
     text(message, 640, 300);
   } else if (scoreDiff < 0) {
-    message = ("Player 2 wins by " + -scoreDiff + endPart);
+    message = (p2.colorString + " wins by " + -scoreDiff + endPart);
     text(message, 640, 300);
   } else {
     text(message, 815, 300);
@@ -207,7 +207,7 @@ void activateButton(int buttonNum, boolean setup) {
     exit();
   }
   if (!result) {
-    beepBoop();
+    error.play();
   }
 }
 
@@ -311,10 +311,6 @@ void placeOnPanel(Piece p) {
   panel.placePiece(2, 2, p);
 }
 
-void beepBoop() {
-  error.play();
-}
-
 
 //user interaction
 
@@ -353,7 +349,7 @@ void mousePressed() {
       panel.reset();
       currentTurnPlayed = true;
     } else {
-      beepBoop();
+      error.play();
     }
   }
 }
