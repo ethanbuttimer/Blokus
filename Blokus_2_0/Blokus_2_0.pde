@@ -1,9 +1,13 @@
-// Blokus
+//Blokus
+//Computer version of a two-player Blokus board game.
+//By Ethan Buttimer
+//Completed: 1-16-19
 
 import processing.sound.*;
 
 //sounds
 SoundFile click;
+SoundFile placer;
 SoundFile error;
 SoundFile swoosh;
 SoundFile flip;
@@ -20,14 +24,13 @@ boolean gameEnded = false;
 Player currentPlayer;
 Player otherPlayer;
 Button activeButton;
-int[] panelSelection;
-boolean currentTurnPlayed = false;
 
+int[] panelSelection;
 Piece panelPiece;
 Piece phantomPiece;
 int phantomI;
 int phantomJ;
-boolean phantomPiecePlaced;
+boolean phantomPiecePlaced = false;
 
 ArrayList<Button> buttonList = new ArrayList<Button>();
 
@@ -82,6 +85,7 @@ void setup() {
   swoosh = new SoundFile(this, "whoosh.wav");
   flip = new SoundFile(this, "switch.wav");
   tada = new SoundFile(this, "tada.wav");
+  placer = new SoundFile(this, "Click2.wav");
   
   rotateCCWButton.giveImage(rotationCCW);
   rotateCWButton.giveImage(rotationCW);
@@ -131,8 +135,10 @@ void setUpTurnInterface() {
   panel.reset();
   panel.show();
   currentPlayer.fillInventory();
-  currentTurnPlayed = false;
   phantomPiecePlaced = false;
+  panelSelection = null;
+  phantomI = -1;
+  phantomJ = -1;
 }
 
 void setUpEndInterface() {
@@ -258,7 +264,7 @@ boolean transformationReset(Piece p, int transID) {
 
 boolean controls(int buttonNum) {
   if (buttonNum == 4) {
-    if (currentTurnPlayed) {
+    if (phantomPiecePlaced) {
       finalBoard.placePiece(phantomI, phantomJ, phantomPiece);
       currentPlayer.points += phantomPiece.squareSet.length;
       currentPlayer.playedLastTurn = true;
@@ -268,11 +274,8 @@ boolean controls(int buttonNum) {
       return false;
     }
   } else if (buttonNum == 5) {
-    panel.reset();
-    resetButtons();
     resetTurnPieces();
-    currentTurnPlayed = false;
-    phantomPiecePlaced = false;
+    setUpTurnInterface();
   } else if (buttonNum == 6) {
     if (!otherPlayer.playedLastTurn) {
       setUpEndInterface();
@@ -312,7 +315,9 @@ void placeOnPanel(Piece p) {
 }
 
 
+
 //user interaction
+
 
 
 void mousePressed() {
@@ -325,32 +330,27 @@ void mousePressed() {
       }
     }
     if (!inSetup) {
-      if (currentPlayer.invBoard.onBoard(mouseX, mouseY) && !currentTurnPlayed && panelPiece == null) {
+      if (currentPlayer.invBoard.onBoard(mouseX, mouseY) && !phantomPiecePlaced && panelPiece == null) {
         int selectedPieceID = currentPlayer.invBoard.getPieceType(mouseX, mouseY);
         if (selectedPieceID != -1) {
           panelPiece = currentPlayer.inventory[selectedPieceID];
-          panel.placePiece(2, 2, panelPiece);
+          placeOnPanel(panelPiece);
           currentPlayer.removeFromInventory(panelPiece);
+          placer.play();
         }
-      } else if (panel.onBoard(mouseX, mouseY)) {
+      } else if (panel.onBoard(mouseX, mouseY) && panelPiece != null) {
         panelSelection = panel.mouseLocation(mouseX, mouseY);
+        phantomPiece = panelPiece;
+        panel.reset();
+        placer.play();
       }
     }
-  } else if (!inSetup && panelSelection != null && panelPiece != null) {
-    int[] boardSelection = finalBoard.mouseLocation(mouseX, mouseY);
-    int i = boardSelection[0] - panelSelection[0] + 2;
-    int j = boardSelection[1] - panelSelection[1] + 2;
-    if (finalBoard.makeChecks(i, j, panelPiece)) {
-      phantomPiece = panelPiece;
-      phantomI = i;
-      phantomJ = j;
-      phantomPiecePlaced = true;
-      panelPiece = null;
-      panel.reset();
-      currentTurnPlayed = true;
-    } else {
-      error.play();
-    }
+  } else if (!inSetup && panelSelection != null && phantomPiece != null && phantomCheck()) {
+    phantomPiecePlaced = true;
+    panelPiece = null;
+    placer.play();
+  } else {
+    error.play();
   }
 }
 
@@ -365,10 +365,26 @@ void mouseReleased() {
 void pieceAnimations() {
   if (phantomPiecePlaced) {
     showPhantom();
+  } else if (panelSelection != null) {
+    phantomCheck();
   }
 }
 
 //draws the piece the current player intends to place, before being committed by finish button
+boolean phantomCheck() {
+  int[] boardLoc = finalBoard.mouseLocation(mouseX, mouseY);
+  int i = boardLoc[0] - panelSelection[0] + 2;
+  int j = boardLoc[1] - panelSelection[1] + 2;
+  if (finalBoard.makeChecks(i, j, phantomPiece)) {
+    phantomI = i;
+    phantomJ = j;
+    showPhantom();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 void showPhantom() {
   pushMatrix();
   translate(finalBoard.insetsX + 30 * phantomI, finalBoard.insetsY + 30 * phantomJ);
