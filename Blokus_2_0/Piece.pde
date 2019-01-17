@@ -1,3 +1,8 @@
+//Describes a set of squares, 
+//with an arrangement given by a typeID and the pieceTypeData,
+//and a color given by the color ID.
+//Includes methods for rotations and flips.
+
 class Piece {
   private int colorID;
   private int typeID;
