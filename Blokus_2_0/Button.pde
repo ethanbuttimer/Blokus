@@ -1,3 +1,5 @@
+//Custom button class.
+
 class Button {
   private int x, y;
   private int sizeX, sizeY;
