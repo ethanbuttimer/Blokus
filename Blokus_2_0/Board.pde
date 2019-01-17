@@ -1,3 +1,6 @@
+//Describes Blokus Board objects used for player inventories,
+//a panel used for rotations and flips, and the main game board.
+
 class Board {
   private Square[][] positions;
   private int cols;
@@ -32,11 +35,11 @@ class Board {
       boolean isAtCorner = false;
       for (Square sqr : p.squareSet) {
         int resultCase = placementLegal(i, j, sqr);
-        if (resultCase == 3) {
-          return true;
-        }
         if (resultCase == 0) {
           return false;
+        }
+        if (resultCase == 3) {
+          return true;
         } else if (resultCase == 2) {
           isAtCorner = true;
         }
@@ -66,14 +69,15 @@ class Board {
     } catch (ArrayIndexOutOfBoundsException e) {
       return 0;
     }
-    
-    if (position.colorMarker && position.colorID == sqr.colorID) {
-      return 3;
-    }
-    
+   
     //tests that new square is not overlapping an existing piece
     if (position.filled) {
       return 0;  
+    }
+    
+    //for first turn color marker spot
+    if (position.colorMarker && position.colorID == sqr.colorID) {
+      return 3;
     }
     
     ArrayList<Square> neighbors = new ArrayList<Square>();
