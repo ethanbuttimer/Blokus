@@ -1,3 +1,9 @@
+//Class describing individual squares,
+//either the empty squares of a Blokus board,
+//the color marked squares used in the first turn,
+//or the filled squares making up the game pieces.
+//Includes the colors and method used to render the squares.
+
 class Square {
   private int i;
   private int j;
