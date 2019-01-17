@@ -1,3 +1,7 @@
+//Used to store information regarding each player, 
+//most importantly their point total, color, and
+//the remaining pieces in their inventory.
+
 class Player {
   private Piece[] inventory = new Piece[21];
   private Board invBoard;
